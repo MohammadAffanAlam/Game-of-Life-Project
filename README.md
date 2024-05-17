@@ -9,3 +9,5 @@ This is my first large coding project, as part of my IB computer science class. 
 - Change the color of alive cells and dead cells
 - Create a save file
 - Load a Game of Life state from a save file
+
+The project features error checks for negative numbers or invalid integers for grid size, and pauses generation if it detects that the grid has reached a state where it is stable and thus no change is made (or if all cells are dead).
