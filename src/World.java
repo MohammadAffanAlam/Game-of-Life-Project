@@ -2,57 +2,57 @@ import java.util.*;
 
 public class World {
     private Random random = new Random();
-    private int Alive = 0;
-    private Boolean[][] World;
-    private Boolean ChangeState; // false if the world pattern becomes static
+    private int alive = 0;
+    private Boolean[][] world;
+    private Boolean changeState; // false if the world pattern becomes static
 
     public World() {
-        World = new Boolean[1][1];
-        ChangeState = false;
-        World[0][0] = false;
+        world = new Boolean[1][1];
+        changeState = false;
+        world[0][0] = false;
     }
 
     public World(int Size) {
-        World = new Boolean[Size][Size];
-        ChangeState = true;
+        world = new Boolean[Size][Size];
+        changeState = true;
 
-        for (int i = 0; i < World.length; i++) {
-            for (int j = 0; j < World.length; j++) {
+        for (int i = 0; i < world.length; i++) {
+            for (int j = 0; j < world.length; j++) {
                 if (random.nextBoolean()) {
-                    Alive++;
-                    World[i][j] = true;
+                    alive++;
+                    world[i][j] = true;
                 }
                 else {
-                    World[i][j] = false;
+                    world[i][j] = false;
                 }
             }
         }
     }
 
     public int GetAlive() {
-        return Alive;
+        return alive;
     }
 
     public Boolean[][] GetWorld() {
-        return World;
+        return world;
     }
 
     public Boolean GetChangeState() {
-        return ChangeState;
+        return changeState;
     }
 
     public void SetWorld(Boolean[][] World2) {
-        World = new Boolean[World2.length][World2.length];
-        ChangeState = true;
+        world = new Boolean[World2.length][World2.length];
+        changeState = true;
 
-        for (int i = 0; i < World.length; i++) {
-            for (int j = 0; j < World.length; j++) {
+        for (int i = 0; i < world.length; i++) {
+            for (int j = 0; j < world.length; j++) {
                 if (World2[i][j]) {
-                    Alive++;
-                    World[i][j] = true;
+                    alive++;
+                    world[i][j] = true;
                 }
                 else {
-                    World[i][j] = false;
+                    world[i][j] = false;
                 }
             }
         }
@@ -60,25 +60,25 @@ public class World {
 
 
     public void Generation() {
-        Boolean[][] World2 = new Boolean[World.length][World.length];
-        ChangeState = false;
-        Alive = 0;
+        Boolean[][] World2 = new Boolean[world.length][world.length];
+        changeState = false;
+        alive = 0;
 
-        for (int i = 0; i < World.length; i++) {
-            for (int j = 0; j < World.length; j++) {
+        for (int i = 0; i < world.length; i++) {
+            for (int j = 0; j < world.length; j++) {
                 int neighbours = 0;
 
-                if (World[i][j]) {
+                if (world[i][j]) {
                     for (int x = -1; x <= 1; x++) {
                         for (int y = -1; y <= 1; y++) {
                             if (x == 0 && y == 0) {
                                 continue;
                             }
 
-                            int neighbourX = (j + x + World.length) % World.length; // Loops back if overloaded
-                            int neighbourY = (i + y + World.length) % World.length;
+                            int neighbourX = (j + x + world.length) % world.length; // Loops back if overloaded
+                            int neighbourY = (i + y + world.length) % world.length;
 
-                            if (World[neighbourY][neighbourX]) {
+                            if (world[neighbourY][neighbourX]) {
                                 neighbours++;
                             }
                         }
@@ -98,10 +98,10 @@ public class World {
                                 continue;
                             }
 
-                            int neighbourX = (j + x + World.length) % World.length;
-                            int neighbourY = (i + y + World.length) % World.length;
+                            int neighbourX = (j + x + world.length) % world.length;
+                            int neighbourY = (i + y + world.length) % world.length;
 
-                            if (World[neighbourY][neighbourX]) {
+                            if (world[neighbourY][neighbourX]) {
                                 neighbours++;
                             }
                         }
@@ -115,8 +115,8 @@ public class World {
                     }
                 }
 
-                if (World2[i][j] != World[i][j]) {
-                    ChangeState = true;
+                if (World2[i][j] != world[i][j]) {
+                    changeState = true;
                 }
             }
         }
@@ -124,11 +124,11 @@ public class World {
         for (int i = 0; i < World2.length; i++) {
             for (int j = 0; j < World2.length; j++) {
                 if (World2[i][j]) {
-                    Alive++;
-                    World[i][j] = true;
+                    alive++;
+                    world[i][j] = true;
                 }
                 else {
-                    World[i][j] = false;
+                    world[i][j] = false;
                 }
             }
         }
